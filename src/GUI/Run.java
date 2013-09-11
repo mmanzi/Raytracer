@@ -13,7 +13,7 @@ public class Run {
 	public static void main(String[] args) {
 		
 		//World myWorld = new TestScene();
-		World myWorld = new Scene2();
+		World myWorld = new Scene3();
 		
 		RGBColor[][] rendered_image = myWorld.render_scene();
 		new GUI(rendered_image);
