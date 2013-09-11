@@ -1,7 +1,6 @@
 package GUI;
 
-import utils.VectorUtils;
-import Utility.*;
+import Utility.RGBColor;
 import World.*;
 
 public class Run {
@@ -13,7 +12,7 @@ public class Run {
 	public static void main(String[] args) {
 		
 		//World myWorld = new TestScene();
-		World myWorld = new Scene3();
+		World myWorld = new Scene2();
 		
 		RGBColor[][] rendered_image = myWorld.render_scene();
 		new GUI(rendered_image);

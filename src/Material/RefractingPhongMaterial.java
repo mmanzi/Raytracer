@@ -23,10 +23,10 @@ public  class RefractingPhongMaterial extends Material{
 		this.ambientcolor = acolor;
 		this.specularcolor = scolor;
 		this.shininess = s;
-		this.reflectivity=0.0f;//Todo
+		this.reflectivity=0.5f;//Todo
 		this.trace=t;
 		this.refractionindex=1;//todo
-		this.refractivity=1f;//todo
+		this.refractivity=0.4f;//todo
 	}
 	
 	/**
@@ -34,8 +34,7 @@ public  class RefractingPhongMaterial extends Material{
 	 **/
 	@Override
 	public RGBColor shade(HitRecord hit, Light l) {
-		return new RGBColor(0f,0f,0f);
-		/*RGBColor erg=new RGBColor(0,0,0);
+		RGBColor erg=new RGBColor(0,0,0);
 		
 		RGBColor lc = new RGBColor(l.getColor());
 		RGBColor diffusec = new RGBColor(diffusecolor);
@@ -64,34 +63,32 @@ public  class RefractingPhongMaterial extends Material{
 		erg.add(ambientcolor);
 		erg.mult(1 - reflectivity-refractivity);
 		
-		return erg;*/
+		return erg;
 	}
 
 	@Override
 	public RGBColor mirrorshade(HitRecord hit,Tracer t) {
-		return new RGBColor(0f,0f,0f);
-		/*if(reflectivity==0f)return new RGBColor(0f,0f,0f);
+		if(reflectivity==0f)return new RGBColor(0f,0f,0f);
 		Vector3f v=new Vector3f(hit.getNormal());
 		v.scale((-2*(hit.getRay().direction).dot(hit.getNormal())));
 		v.add(hit.getRay().direction);
 		Ray ray=new Ray(hit.getHitPos(),v);
 		RGBColor q = new RGBColor(t.trace(ray));
 		q.mult(reflectivity);
-		return q;*/
+		return q;
 	}
 	
 	@Override
 	public RGBColor refractionshade(HitRecord hit, Tracer t) {
 		if(refractivity==0f)return new RGBColor(0f,0f,0f);
 		float  n1 =hit.getRay().refractionindex;
-		float n2=(n1==1f? this.refractionindex : 1);
-		
+		float n2=(n1!=refractionindex? this.refractionindex : 1);
 		Vector3f dir = new Vector3f( hit.getRay().direction );
 		dir.normalize();
 		dir.negate();
 		
 		float theta1 = (float) Math.acos(dir.dot(hit.getNormal()));
-		float theta2 = (float) Math.asin((/*Math.sin*/(theta1)*n1)/n2);
+		float theta2 = (float) Math.asin((Math.sin(theta1)*n1)/n2);
 		
 		dir.negate();
 		Vector3f r = new Vector3f(dir);
@@ -102,7 +99,7 @@ public  class RefractingPhongMaterial extends Material{
 		r.add(s);
 		r.negate();
 		
-		Ray ray=new Ray(hit.getHitPos(),r,n2);
+		Ray ray=new Ray(hit.getHitPos(),hit.getRay().direction,n2);
 		RGBColor q = new RGBColor(t.trace(ray));
 		q.mult(refractivity);
 		return q;
