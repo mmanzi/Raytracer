@@ -1,5 +1,6 @@
 package GUI;
 
+import utils.VectorUtils;
 import Utility.*;
 import World.*;
 
@@ -16,6 +17,8 @@ public class Run {
 		
 		RGBColor[][] rendered_image = myWorld.render_scene();
 		new GUI(rendered_image);
+		System.out.println(VectorUtils.counta);
+		System.out.println(VectorUtils.countb);
 	}
 
 }

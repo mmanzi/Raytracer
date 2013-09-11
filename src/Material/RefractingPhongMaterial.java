@@ -68,6 +68,7 @@ public  class RefractingPhongMaterial extends Material{
 	@Override
 	public RGBColor mirrorshade(HitRecord hit,Tracer t) {
 		
+		if(reflectivity==0f)return new RGBColor(0f,0f,0f);
 		Vector3f v=new Vector3f(hit.getNormal());
 		v.scale((-2*(hit.getRay().direction).dot(hit.getNormal())));
 		v.add(hit.getRay().direction);
@@ -79,6 +80,7 @@ public  class RefractingPhongMaterial extends Material{
 	
 	@Override
 	public RGBColor refractionshade(HitRecord hit, Tracer t) {
+		if(refractivity==0f)return new RGBColor(0f,0f,0f);
 		float  n1 =hit.getRay().refractionindex;
 		float n2=(n1==1f? this.refractionindex : 1);
 		
