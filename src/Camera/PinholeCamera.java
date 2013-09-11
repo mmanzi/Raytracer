@@ -49,6 +49,7 @@ public class PinholeCamera extends Camera {
 		transformationMatrix.transform(p);
 		
 		ray.direction = VectorUtils.createVectorAB(position, p);
+		ray.direction.normalize();
 		return ray;
 	}
 }
