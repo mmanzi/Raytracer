@@ -4,7 +4,6 @@ import javax.vecmath.Point3f;
 import javax.vecmath.Vector3f;
 
 public class VectorUtils {
-	public static int counta,countb;
 	public static Vector3f scaleVector(Vector3f vec, float scaleFactor) {
 		Vector3f scaledVector = new Vector3f(vec);
 		scaledVector.scale(scaleFactor);

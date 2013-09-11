@@ -18,14 +18,15 @@ public  class RefractingPhongMaterial extends Material{
 	Tracer trace;
 	
 	public RefractingPhongMaterial(RGBColor dcolor,RGBColor acolor,RGBColor scolor,float s,float r,Tracer t,float ref){
+		super();
 		this.diffusecolor = dcolor;
 		this.ambientcolor = acolor;
 		this.specularcolor = scolor;
 		this.shininess = s;
-		this.reflectivity=r;
+		this.reflectivity=0.0f;//Todo
 		this.trace=t;
-		this.refractionindex=ref;
-		this.refractivity=0.3f;
+		this.refractionindex=1;//todo
+		this.refractivity=1f;//todo
 	}
 	
 	/**
@@ -33,7 +34,8 @@ public  class RefractingPhongMaterial extends Material{
 	 **/
 	@Override
 	public RGBColor shade(HitRecord hit, Light l) {
-		RGBColor erg=new RGBColor(0,0,0);
+		return new RGBColor(0f,0f,0f);
+		/*RGBColor erg=new RGBColor(0,0,0);
 		
 		RGBColor lc = new RGBColor(l.getColor());
 		RGBColor diffusec = new RGBColor(diffusecolor);
@@ -60,22 +62,22 @@ public  class RefractingPhongMaterial extends Material{
 		specularc.mult(lc);
 		erg.add(specularc);
 		erg.add(ambientcolor);
-		erg.mult(1 - reflectivity);
-
-		return erg;
+		erg.mult(1 - reflectivity-refractivity);
+		
+		return erg;*/
 	}
 
 	@Override
 	public RGBColor mirrorshade(HitRecord hit,Tracer t) {
-		
-		if(reflectivity==0f)return new RGBColor(0f,0f,0f);
+		return new RGBColor(0f,0f,0f);
+		/*if(reflectivity==0f)return new RGBColor(0f,0f,0f);
 		Vector3f v=new Vector3f(hit.getNormal());
 		v.scale((-2*(hit.getRay().direction).dot(hit.getNormal())));
 		v.add(hit.getRay().direction);
 		Ray ray=new Ray(hit.getHitPos(),v);
 		RGBColor q = new RGBColor(t.trace(ray));
 		q.mult(reflectivity);
-		return q;
+		return q;*/
 	}
 	
 	@Override
@@ -104,6 +106,7 @@ public  class RefractingPhongMaterial extends Material{
 		RGBColor q = new RGBColor(t.trace(ray));
 		q.mult(refractivity);
 		return q;
+		
 	}
 
 

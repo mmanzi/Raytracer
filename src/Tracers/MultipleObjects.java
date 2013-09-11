@@ -41,24 +41,25 @@ public class MultipleObjects extends Tracer {
 
 		// shading
 		if (hit.anyHit()) {
-			RGBColor color = new RGBColor();
+			RGBColor color = new RGBColor(0f,0f,0f);
 			Iterator<Light> lightItr = world_ptr.getLightIterator();
-			while (lightItr.hasNext()) {
+			while (lightItr.hasNext())
+			{
 				Light lightsource = lightItr.next();
 				HitRecord lighthit = gethit(lightsource.getRayFromObject(hit
 						.getHitPos()));
-				if (!lighthit.anyHit()|| !lightsource.isBetweenCameraAndHit(hit.getHitPos(),lighthit)) {
+				if (!lighthit.anyHit()|| !lightsource.isBetweenCameraAndHit(hit.getHitPos(),lighthit))
+				{
 					color.add(hit.shade(lightsource));
 				}
-
-				++dept;
-				if(dept<=3)
-					color.add(new RGBColor(hit.mirrorshade(this)));
-				if(dept<=3)
-					color.add(new RGBColor(hit.refrectionshade(this)));
-				--dept;
-				
 			}
+			
+			++dept;
+			if(dept<=3)
+				color.add(new RGBColor(hit.mirrorshade(this)));
+			if(dept<=3)
+				color.add(new RGBColor(hit.refrectionshade(this)));
+			--dept;
 			return color;
 		} else {
 			return world_ptr.getBackgroundColor();

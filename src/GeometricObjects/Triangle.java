@@ -43,8 +43,7 @@ public class Triangle extends AbstractGeometricObject {
 		m.invert();
 		m.transform(n);
 		if(n.z<=tmin || n.x<=0 || n.y <=0 || n.x+n.y>=1)
-			{VectorUtils.counta++;return hit;}
-		VectorUtils.countb++;
+			return hit;
 		Point3f intersc =new Point3f(ray.direction);
 		intersc.scale(n.z);
 		intersc.add(ray.origin);

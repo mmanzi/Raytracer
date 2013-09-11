@@ -58,7 +58,7 @@ public  class MirrorPhongMaterial extends Material{
 		specularc.mult(lc);
 		erg.add(specularc);
 		erg.add(ambientcolor);
-		
+		erg.mult(1 - reflectivity);
 		return erg;
 	}
 
@@ -69,8 +69,9 @@ public  class MirrorPhongMaterial extends Material{
 		v.scale((-2*(hit.getRay().direction).dot(hit.getNormal())));
 		v.add(hit.getRay().direction);
 		Ray ray=new Ray(hit.getHitPos(),v);
-		
-		return new RGBColor(t.trace(ray));
+		RGBColor q = new RGBColor(t.trace(ray));
+		q.mult(reflectivity);
+		return q;
 	}
 
 }
