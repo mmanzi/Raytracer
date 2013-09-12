@@ -24,6 +24,14 @@ public abstract class World {
 	LinkedList<Light> lights;			//a list of all light-sources in the scene
 	Camera camera;						//the camera from which one we see the scene, the camera also generates the rays
 	
+	public int getHres() {
+		return hres;
+	}
+	
+	public int getVres() {
+		return vres;
+	}
+	
 	/**
 	 * This abstract method should be used in subclasses to setup the scene!
 	 */
