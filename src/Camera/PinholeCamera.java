@@ -28,6 +28,7 @@ public class PinholeCamera extends Camera {
 	public RGBColor[][] renderScene(RGBColor[][] img, Tracer rt) {
 		for (int x = 0; x < horizontalResolution; x++)
 			for (int y = 0; y < verticalResolution; y++) {
+				System.out.println("X: " + x + " Y: " + y);
 				img[x][y] = renderPixel(x, y, rt);
 			}
 		return img;

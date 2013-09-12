@@ -53,34 +53,23 @@ public class Scene3 extends World {
 	//	Triangle tri = new Triangle(redMat,new Point3f(0f, -1f, -5f),new Point3f(0f, 1f, -5f),new Point3f(2f, -1f, -5f));
 		
 		//Rectangle2 tri = new Rectangle2(redMat,new Point3f(0f, -1f, -5f),new Point3f(0f, 1f, -5f),new Point3f(2f, -1f, -5f));
+/*
+      g+--------+f
+	  /        /|
+	 /        / |
+   c+--------+e |
+	|        |  |
+	| d      |  +h
+	|        | /
+	|        |/
+   a+--------+b
 
-		/*
-								  f+--------+e
-								  /        /|
-								 /        / |
-							   g+--------+c |
-								|        |  |
-								| h      |  +b
-								|        | /
-								|        |/
-							   d+--------+a
-		 *//*
-                      g+--------+f
-					  /        /|
-					 /        / |
-				   c+--------+e |
-					|        |  |
-					| d      |  +h
-					|        | /
-					|        |/
-				   a+--------+b
-				   
-				  //Point description
-				   Cuboid2(redMat,a,c,b,d);
+
+
+/Point description
+Cuboid2(redMat,a,c,b,d);
 */
-		
-		
-		Cuboid2 cub = new Cuboid2(redMat,new Point3f(0f, -1f, -5f),new Point3f(0f, 1f, -5f),new Point3f(2f, -1f, -5f),new Point3f(2f, -1f, -7f));
+		Cuboid2 cub = new Cuboid2(redMat,new Point3f(-2f, 0f, 2f),new Point3f(2f, 0f, 2f),new Point3f(-2f, 2f, 2f),new Point3f(-2f, 0f, -2f));
 		//Cuboid thingy = new Cuboid(redMat, new Point3f(-4f, 4f, 0f), new Vector3f(1f, 0f, 0f), 2f, 4f, new Vector3f(0f, 0f, -1f), 6f);
 //		Rectangle thingy = new Rectangle(redMat, new Point3f(-1f, 1f, -5f), new Vector3f(0f, 1f, 0f), new Vector3f(0f, 0f, -1f), 2f, 2f);
 		//objects.add(thingy);

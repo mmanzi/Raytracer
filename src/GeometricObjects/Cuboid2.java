@@ -20,13 +20,13 @@ public class Cuboid2 extends AbstractGeometricObject {
 		
 		/*
 								  f+--------+e
-								  /        /|
-								 /        / |
+								  /|       /|
+								 / |      / |
 							   g+--------+c |
-								|        |  |
-								| h      |  +b
-								|        | /
-								|        |/
+								|  |     |  |
+								| h+-----|--+b
+								| /      | /
+								|/       |/
 							   d+--------+a
 		 
 		                          g+--------+f
@@ -91,25 +91,18 @@ public class Cuboid2 extends AbstractGeometricObject {
 		
 		
 		if(hit1.getHitDist()<hit2.getHitDist() && hit1.getHitDist()<hit3.getHitDist() && hit1.getHitDist()<hit4.getHitDist() && hit1.getHitDist()<hit5.getHitDist() && hit1.getHitDist()<hit6.getHitDist()){
-			System.out.print("HIT1");
 			return hit1;
 		}else if(hit2.getHitDist()<hit1.getHitDist() && hit2.getHitDist()<hit3.getHitDist() && hit2.getHitDist()<hit4.getHitDist() && hit2.getHitDist()<hit5.getHitDist() && hit2.getHitDist()<hit6.getHitDist()){
-			System.out.print("HIT2");
 			return hit2;
 		}else if(hit3.getHitDist()<hit1.getHitDist() && hit3.getHitDist()<hit2.getHitDist() && hit3.getHitDist()<hit4.getHitDist() && hit3.getHitDist()<hit5.getHitDist() && hit3.getHitDist()<hit6.getHitDist()){
-			System.out.print("HIT3");
 			return hit3;
 		}else if(hit4.getHitDist()<hit1.getHitDist() && hit4.getHitDist()<hit2.getHitDist() && hit4.getHitDist()<hit3.getHitDist() && hit4.getHitDist()<hit5.getHitDist() && hit4.getHitDist()<hit6.getHitDist()){
-			System.out.print("HIT4");
 			return hit4;
 		} else if(hit5.getHitDist()<hit1.getHitDist() && hit5.getHitDist()<hit2.getHitDist() && hit5.getHitDist()<hit3.getHitDist() && hit5.getHitDist()<hit4.getHitDist() && hit5.getHitDist()<hit6.getHitDist()){
-			System.out.print("HIT5");
 			return hit5;
 		} else if(hit6.getHitDist()<hit1.getHitDist() && hit6.getHitDist()<hit2.getHitDist() && hit6.getHitDist()<hit3.getHitDist() && hit6.getHitDist()<hit4.getHitDist() && hit6.getHitDist()<hit5.getHitDist()){
-			System.out.print("HIT6");
 			return hit6;
 		}else {
-			System.out.print("NO HIT");
 			return hit1;
 		}
 		

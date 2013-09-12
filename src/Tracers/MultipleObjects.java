@@ -52,7 +52,7 @@ public class MultipleObjects extends Tracer {
 					color.add(hit.shade(lightsource));
 				}
 			}
-			if(ray.dept<=3)
+			if(ray.dept<=10)
 				color.add(new RGBColor(hit.mirrorshade(this)));
 			if(ray.dept<=3)
 				color.add(new RGBColor(hit.refrectionshade(this)));

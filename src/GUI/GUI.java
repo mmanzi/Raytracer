@@ -44,7 +44,12 @@ public class GUI extends JFrame {
 						(int) (255 * Math.min(1, img[i][j].b)));
 				bufferedImg.setRGB(i, j, pix_color.getRGB());
 			}
+			// add bufferedImage to JFrame
+			ImageIcon ic = new ImageIcon(bufferedImg);
+			JLabel jp = new JLabel(ic);
+			add(jp);
 		}
+		
 
 		String type = "png";
 		File file = new File("renderedImage.".concat(type));
@@ -54,10 +59,6 @@ public class GUI extends JFrame {
 			e.printStackTrace();
 		}
 
-		// add bufferedImage to JFrame
-		ImageIcon ic = new ImageIcon(bufferedImg);
-		JLabel jp = new JLabel(ic);
-		add(jp);
 
 		this.setVisible(true);
 	}

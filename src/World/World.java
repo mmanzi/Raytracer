@@ -50,6 +50,14 @@ public abstract class World {
 			return camera.renderScene(img, rt);
 		return img;
 	}
+	
+	public RGBColor renderPixel(int x,int y) {
+		RGBColor rgbColor = new RGBColor();
+		if(camera!=null)
+			rgbColor = camera.renderPixel(x, y, rt);
+		return rgbColor;
+	}
+	
 	/**
 	 * getter functions for different world content
 	 */
