@@ -12,7 +12,6 @@ import Utility.RGBColor;
 public  class DiffuseMaterial extends Material{
 
 	RGBColor color;
-	public float reflectivity=0f;
 	
 	public DiffuseMaterial(RGBColor color){
 		this.color = color;

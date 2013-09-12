@@ -1,6 +1,6 @@
 package GUI;
 
-import Utility.*;
+import Utility.RGBColor;
 import World.*;
 
 public class Run {

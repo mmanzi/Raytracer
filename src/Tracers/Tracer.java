@@ -11,7 +11,6 @@ import World.World;
 public abstract class Tracer {
 
 	protected World world_ptr;
-	
 	public Tracer(World w){
 		world_ptr = w;
 	}
