@@ -24,7 +24,7 @@ public class Triangle extends AbstractGeometricObject {
 		ac.set(c);
 		ab.sub(a);
 		ac.sub(a);
-		normal=new Vector3f(VectorUtils.createCrossVector(ac,ab));
+		normal=new Vector3f(VectorUtils.createCrossVector(ab,ac));
 		normal.normalize();
 	}
 

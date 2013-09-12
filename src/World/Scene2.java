@@ -3,6 +3,7 @@ package World;
 import javax.vecmath.Point3f;
 import javax.vecmath.Vector3f;
 
+import Camera.LensCamera;
 import Camera.PinholeCamera;
 import GeometricObjects.Plane;
 import GeometricObjects.Rectangle2;
@@ -32,12 +33,25 @@ public class Scene2 extends World {
 		vres = 1000;
 		
 		//define camera
-		camera = new PinholeCamera(new Point3f(0.f, 0.f, 4.f), 		// eye
-										new Point3f(0f, 0f, -10.f),  // look-at
-										new Vector3f(0.f, 1.f,0.f),	//up
-										hres,						//horizontal resolution
-										vres,						//vertical resolution
-										Math.PI / 4); 						
+//		camera = new LensCamera(new Point3f(0.f, 0.f, 14.f), 		// eye
+//										new Point3f(0f, 0f, 0.f),  // look-at
+//										new Vector3f(0.f, 1.f,0.f),	//up
+//										hres,						//horizontal resolution
+//										vres,						//vertical resolution
+//										Math.PI / 4, 
+//										0.3f,						// lens radius
+//										20f, 						// focal length
+//										1000); 						// rays per pixel
+		
+		camera = new PinholeCamera(new Point3f(0.f, 0.f, 14.f), 		// eye
+				new Point3f(0f, 0f, 0.f),  // look-at
+				new Vector3f(0.f, 1.f,0.f),	//up
+				hres,						//horizontal resolution
+				vres,						//vertical resolution
+				Math.PI / 4); 						// rays per pixel
+		
+		//define background color
+		background_color = new RGBColor(.8f,.8f,.8f);
 		
 		//define background color
 		background_color = new RGBColor(0.f,1f,0.f);
@@ -64,7 +78,7 @@ public class Scene2 extends World {
 		
 
 		//Material blueMat = new DiffuseMaterial(new RGBColor(0.0f, 0.0f, 1.f));
-		Material blueMat = new DiffuseMaterial(new RGBColor(1f, 1f, 1f));
+		Material blueMat = new DiffuseMaterial(new RGBColor(0.3f, 0.3f, 0.3f));
 		Plane blue2Plane = new Plane(blueMat, new Point3f(0.f,-2f,0.f), new Vector3f(0.f, 1.f, 0.f));
 		objects.add(blue2Plane);
 
@@ -73,15 +87,9 @@ public class Scene2 extends World {
 		//objects.add(bluePlane);
 		
 		//Add light sources
-//		Light light = new MovableLight(new Point3f(7f,7f,0f),new RGBColor(1f,1f,1f));
-//		lights.add(light);
-//		Light light2 = new MovableLight(new Point3f(-7f,7f,0f),new RGBColor(0.3f,0.3f,0.3f));
-//		lights.add(light2);
 		Light light3 = new MovableLight(new Point3f(-2.f, 4.f, -3f),new RGBColor(1f,1f,1f));
 		lights.add(light3);
 		Light light4 = new MovableLight(new Point3f(2.f, 4.f, -3f),new RGBColor(1f,0f,0f));
 		lights.add(light4);
-//		Light lightd = new DirectionalLight(new Vector3f(0.f,-1.f,0.f),new RGBColor(0.8f,0.8f,0.8f));
-///		lights.add(lightd);
 	}
 }

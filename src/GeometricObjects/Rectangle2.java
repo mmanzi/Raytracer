@@ -1,10 +1,8 @@
 package GeometricObjects;
 
-import javax.vecmath.Matrix3f;
 import javax.vecmath.Point3f;
 import javax.vecmath.Vector3f;
 
-import utils.VectorUtils;
 import Material.Material;
 import Utility.HitRecord;
 import Utility.Ray;
@@ -23,7 +21,6 @@ public class Rectangle2 extends AbstractGeometricObject {
 		Point3f d = new Point3f(b);
 		d.add(rich);
 		t2 = new Triangle(mat,b,d,c);
-		
 	}
 
 	@Override
