@@ -17,7 +17,7 @@ import Tracers.*;
 public class TestScene extends World{
 
 	
-	protected void build(Tracer t){
+	protected void build(){
 		//define image resolution
 		hres = 1000;
 		vres = 1000;
@@ -37,7 +37,7 @@ public class TestScene extends World{
 		rt = new MultipleObjects(this);
 		
 		//Add objects
-		Material redMat = new PhongMaterial(new RGBColor(1f, 0.5f, 0f), new RGBColor(0.5f, 0.5f, 1f), new RGBColor(0f, 1f, 0.5f), 30f);
+		Material redMat = new RefractingPhongMaterial(new RGBColor(1f, 0.5f, 0f), new RGBColor(0.5f, 0.5f, 1f), new RGBColor(0f, 1f, 0.5f), 30f);
 
 		Sphere sphere = new Sphere(redMat, new Point3f(0f, 2f, 0.0f), 2f);
 		objects.add(sphere);

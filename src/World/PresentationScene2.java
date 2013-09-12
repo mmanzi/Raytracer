@@ -1,28 +1,22 @@
 package World;
 
 import javax.vecmath.Point3f;
-import javax.vecmath.Point4f;
 import javax.vecmath.Vector3f;
 
-import Camera.LensCamera;
 import Camera.PinholeCamera;
 import GeometricObjects.Cuboid2;
 import GeometricObjects.Plane;
 import GeometricObjects.Rectangle2;
-import GeometricObjects.Sphere;
 import Light.Light;
 import Light.MovableLight;
-import Material.DiffuseMaterial;
 import Material.Material;
-import Material.PhongMaterial;
 import Material.RefractingPhongMaterial;
-import Tracers.Tracer;
 import Utility.RGBColor;
 
 public class PresentationScene2 extends World {
 
 	@Override
-	protected void build(Tracer t) {
+	protected void build() {
 		// define image resolution
 		hres = 500;
 		vres = 500;
@@ -46,15 +40,15 @@ public class PresentationScene2 extends World {
 		// define background color
 		background_color = new RGBColor(0.878f, 1f, 1f);
 
-		Material planeMaterial = new PhongMaterial(new RGBColor(.9f, .9f, .9f),
+		Material planeMaterial = new RefractingPhongMaterial(new RGBColor(.9f, .9f, .9f),
 				new RGBColor(0.1f, 0.1f, 0.1f), new RGBColor(0f, 0f, 0f), hres);
 		Plane bottomPlane = new Plane(planeMaterial, new Point3f(0f, 0f, 0f),
 				new Vector3f(0f, 1f, 0f));
 		objects.add(bottomPlane);
 
-		Material sphereMaterial = new DiffuseMaterial(new RGBColor(.122f,
-				.341f, 1f));
-		Material sphere2Material = new PhongMaterial(new RGBColor(.722f, .18f,
+//		Material sphereMaterial = new RefractingPhongMaterial(new RGBColor(.122f,
+//				.341f, 1f));
+		Material sphere2Material = new RefractingPhongMaterial(new RGBColor(.722f, .18f,
 				.0f), new RGBColor(.722f / 3, .18f / 3, .0f / 3), new RGBColor(
 				0f, 0f, 0f), 1);
 
@@ -71,7 +65,7 @@ public class PresentationScene2 extends World {
 						-2f, 3f, -2f));
 		objects.add(cuboid);
 		
-		Material mirrorMat = new RefractingPhongMaterial(new RGBColor(0.4f, 0.4f, 0.4f), new RGBColor(), new RGBColor(), 0f, 0.5f, t, 0f, 0f);
+		Material mirrorMat = new RefractingPhongMaterial(new RGBColor(0.4f, 0.4f, 0.4f), new RGBColor(), new RGBColor(), 0f, 0.5f, 0f, 0f);
 		
 		Rectangle2 rectangle2 = new Rectangle2(mirrorMat, new Point3f(4f, 0f, -4f), new Point3f(7f, 0f, 6f), new Point3f(4f, 10f, -4f));
 		objects.add(rectangle2);

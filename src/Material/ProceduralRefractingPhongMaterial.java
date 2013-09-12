@@ -3,38 +3,46 @@ package Material;
 import javax.vecmath.Vector3f;
 
 import Light.Light;
+import ProceduralTexture.ProceduralTexture;
 import Utility.HitRecord;
 import Utility.RGBColor;
 
-public  class DoubleSideRefractingPhongMaterial extends RefractingPhongMaterial{
+/**
+ *  A trivial unicolor material
+ */
+public  class ProceduralRefractingPhongMaterial extends RefractingPhongMaterial{
+	ProceduralTexture ptex;
 	
-	public DoubleSideRefractingPhongMaterial(RGBColor diffusecolor,RGBColor ambientcolor,RGBColor specularcolor,float shininess,float reflectivity,float refractionindex,float refractivity){
+	public ProceduralRefractingPhongMaterial(RGBColor diffusecolor,RGBColor ambientcolor,RGBColor specularcolor,float shininess,float reflectivity,float refractionindex,float refractivity,ProceduralTexture tex){
 		super(diffusecolor,ambientcolor,specularcolor, shininess, reflectivity, refractionindex, refractivity);
+		ptex=tex;
 	}
 	
-	public DoubleSideRefractingPhongMaterial(RGBColor diffusecolor,RGBColor ambientcolor,RGBColor specularcolor,float shininess,float reflectivity){
+	public ProceduralRefractingPhongMaterial(RGBColor diffusecolor,RGBColor ambientcolor,RGBColor specularcolor,float shininess,float reflectivity,ProceduralTexture tex){
 		super(diffusecolor,ambientcolor,specularcolor, shininess, reflectivity);
+		ptex=tex;
 	}
 	
-	public DoubleSideRefractingPhongMaterial(RGBColor diffusecolor,RGBColor ambientcolor,RGBColor specularcolor,float shininess){
+	public ProceduralRefractingPhongMaterial(RGBColor diffusecolor,RGBColor ambientcolor,RGBColor specularcolor,float shininess,ProceduralTexture tex){
 		super(diffusecolor,ambientcolor,specularcolor, shininess);
+		ptex=tex;
 	}
 	
-	public DoubleSideRefractingPhongMaterial(RGBColor diffusecolor,RGBColor ambientcolor){
+	public ProceduralRefractingPhongMaterial(RGBColor diffusecolor,RGBColor ambientcolor,ProceduralTexture tex){
 		super(diffusecolor,ambientcolor);
+		ptex=tex;
 	}
 	
-	public DoubleSideRefractingPhongMaterial(RGBColor diffusecolor){
+	public ProceduralRefractingPhongMaterial(RGBColor diffusecolor,ProceduralTexture tex){
 		super(diffusecolor);
+		ptex=tex;
 	}
 	
-	public DoubleSideRefractingPhongMaterial(){
+	public ProceduralRefractingPhongMaterial(ProceduralTexture tex){
 		super();
+		ptex=tex;
 	}
 	
-	/**
-	 * Trivial simply returns the materials color
-	 **/
 	@Override
 	public RGBColor shade(HitRecord hit, Light l) {
 		RGBColor erg=new RGBColor(0,0,0);
@@ -47,8 +55,9 @@ public  class DoubleSideRefractingPhongMaterial extends RefractingPhongMaterial{
 		diffusec.mult(l.getAttenuation(theta.length()));
 		theta.normalize();
 		diffusec.mult(lc);
-		diffusec.mult(Math.abs(n.dot(theta)));
+		diffusec.mult(Math.max(n.dot(theta),0));
 		erg.add(diffusec);
+		erg.set(ptex.getColor(erg,new Vector3f(hit.getHitPos())));
 		
 		RGBColor specularc = new RGBColor(specularcolor);
 		Vector3f Lightdir = new Vector3f(l.getIncomingRay(hit.getHitPos()));
@@ -70,3 +79,4 @@ public  class DoubleSideRefractingPhongMaterial extends RefractingPhongMaterial{
 	}
 
 }
+

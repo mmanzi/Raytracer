@@ -8,7 +8,6 @@ import Light.*;
 import Material.*;
 import Utility.*;
 import Camera.*;
-import Tracers.*;
 /**
  * A simple test scene
  * @author mmanzi
@@ -17,7 +16,7 @@ import Tracers.*;
 public class Scene1 extends World{
 
 	
-	protected void build(Tracer t){
+	protected void build(){
 		
 		//define image resolution
 		hres = 1000;
@@ -38,7 +37,7 @@ public class Scene1 extends World{
 		
 		//Add objects
 		//Material mirrorMat = new MirrorPhongMaterial(new RGBColor(0.f, 0.f, 0.f), new RGBColor(0.f, 0.f, 0.f), new RGBColor(0.f, 0.f, 0.f), 300.f,0.5f,t);
-		Material redMat = new PhongMaterial(new RGBColor(1f, 0.f, 0f), new RGBColor(0.0f, 0.01f, 0.0f), new RGBColor(0f, 1f, 0.5f), 300.f);
+//		Material redMat = new RefractingPhongMaterial(new RGBColor(1f, 0.f, 0f), new RGBColor(0.0f, 0.01f, 0.0f), new RGBColor(0f, 1f, 0.5f), 300.f);
 			
 	//	Material redMat = new DiffuseMaterial(new RGBColor(1.f, 0.5f, 0.5f));
 		
@@ -50,7 +49,7 @@ public class Scene1 extends World{
 		
 		//Material blueMat = new DiffuseMaterial(new RGBColor(1.0f, 0.5f, 0.5f));
 		
-		Material blueMat = new MirrorPhongMaterial(new RGBColor(0.5f, 1.f, 0.5f), new RGBColor(0.2f, 0.2f, 0.2f), new RGBColor(1.0f, 0.2f, 1.0f), 300.f,0.0f,t);
+		Material blueMat = new RefractingPhongMaterial(new RGBColor(0.5f, 1.f, 0.5f), new RGBColor(0.2f, 0.2f, 0.2f), new RGBColor(1.0f, 0.2f, 1.0f), 300.f,0.0f);
 		
 		Plane bluePlane = new Plane(blueMat, new Point3f(0.f,0.6f,0.f), new Vector3f(0.f, -1.f, 0.f));
 		objects.add(bluePlane);
@@ -62,7 +61,7 @@ public class Scene1 extends World{
 		lights.add(light);
 		//Light lightd = new DirectionalLight(new Vector3f(0.f,1.f,0f),new RGBColor(0.8f,0.8f,0.8f));
 		//lights.add(lightd);
-		RefractingPhongMaterial rpm = new RefractingPhongMaterial(new RGBColor(0.f, 0.f, 0.f), new RGBColor(0.0f, 0.0f, 0.0f), new RGBColor(0.0f, 0.f, 0.0f), 300.f,0.f,t,1.5f,0.0f);
+		RefractingPhongMaterial rpm = new RefractingPhongMaterial(new RGBColor(0.f, 0.f, 0.f), new RGBColor(0.0f, 0.0f, 0.0f), new RGBColor(0.0f, 0.f, 0.0f), 300.f,0.f,1.5f,0.0f);
 		Sphere sphere = new Sphere(rpm, new Point3f(0f, -0.f, -6.0f), .5f);
 		objects.add(sphere);
 		

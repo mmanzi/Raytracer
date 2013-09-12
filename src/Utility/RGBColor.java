@@ -1,5 +1,7 @@
 package Utility;
 
+import javax.vecmath.Vector3f;
+
 /**
  * A simple class who represents RGB colors as 3-tuples of float values.
  * 
@@ -29,6 +31,15 @@ public class RGBColor {
 		this.b = c.b;
 	}
 
+	/**
+	 * construct RGBColor from vector
+	 */
+	public RGBColor(Vector3f v) {
+		this.r = v.x;
+		this.g = v.y;
+		this.b = v.z;
+	}
+	
 	/**
 	 * constructor
 	 */
@@ -65,5 +76,21 @@ public class RGBColor {
 		g += c.g;
 		b += c.b;
 	}
-
+	/*
+	 * Set to that Value
+	 */
+	public void set(RGBColor c) {
+		r = c.r;
+		g = c.g;
+		b = c.b;
+	}
+	public RGBColor sanatize() {
+		r = this.r>1?1:this.r;
+		g = this.g>1?1:this.g;
+		b = this.b>1?1:this.b;
+		r = this.r<0?0:this.r;
+		g = this.g<0?0:this.g;
+		b = this.b<0?0:this.b;
+		return this;
+	}
 }

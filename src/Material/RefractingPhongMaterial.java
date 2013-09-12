@@ -14,19 +14,52 @@ import Utility.Ray;
 public  class RefractingPhongMaterial extends Material{
 
 	RGBColor diffusecolor,ambientcolor,specularcolor;
-	float shininess;
-	Tracer trace;
+	float shininess=0;
 	
-	public RefractingPhongMaterial(RGBColor dcolor,RGBColor acolor,RGBColor scolor,float s,float r,Tracer t,float ref,float refra){
-		super();
-		this.diffusecolor = dcolor;
-		this.ambientcolor = acolor;
-		this.specularcolor = scolor;
-		this.shininess = s;
-		this.reflectivity=r;//Todo
-		this.trace=t;
-		this.refractionindex=ref;//todo
-		this.refractivity=refra;//todo
+	public RefractingPhongMaterial(RGBColor diffusecolor,RGBColor ambientcolor,RGBColor specularcolor,float shininess,float reflectivity,float refractionindex,float refractivity){
+		this.diffusecolor = diffusecolor;
+		this.ambientcolor = ambientcolor;
+		this.specularcolor = specularcolor;
+		this.shininess = shininess;
+		this.reflectivity=reflectivity;//Todo
+		this.refractionindex=refractionindex;//todo
+		this.refractivity=refractivity;//todo
+	}
+	
+	public RefractingPhongMaterial(RGBColor diffusecolor,RGBColor ambientcolor,RGBColor specularcolor,float shininess,float reflectivity){
+		this.diffusecolor = diffusecolor;
+		this.ambientcolor = ambientcolor;
+		this.specularcolor = specularcolor;
+		this.shininess = shininess;
+		this.reflectivity=reflectivity;
+	}
+	
+	public RefractingPhongMaterial(RGBColor diffusecolor,RGBColor ambientcolor,RGBColor specularcolor,float shininess){
+		this.diffusecolor = diffusecolor;
+		this.ambientcolor = ambientcolor;
+		this.specularcolor = specularcolor;
+		this.shininess = shininess;
+	}
+	
+	public RefractingPhongMaterial(RGBColor diffusecolor,RGBColor ambientcolor){
+		this.diffusecolor = diffusecolor;
+		this.ambientcolor = ambientcolor;
+		this.specularcolor = new RGBColor();
+		this.shininess = 0;
+	}
+	
+	public RefractingPhongMaterial(RGBColor diffusecolor){
+		this.diffusecolor = diffusecolor;
+		this.ambientcolor = new RGBColor();
+		this.specularcolor = new RGBColor();
+		this.shininess = 0;
+	}
+	
+	public RefractingPhongMaterial(){
+		this.diffusecolor = new RGBColor();
+		this.ambientcolor = new RGBColor();
+		this.specularcolor = new RGBColor();
+		this.shininess = 0;
 	}
 	
 	/**

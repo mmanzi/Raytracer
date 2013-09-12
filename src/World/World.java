@@ -27,7 +27,7 @@ public abstract class World {
 	/**
 	 * This abstract method should be used in subclasses to setup the scene!
 	 */
-	protected abstract void build(Tracer t);
+	protected abstract void build();
 	
 	/**
 	 * constructor, called by main-method in Run. 
@@ -37,7 +37,7 @@ public abstract class World {
 		rt=new MultipleObjects(this);
 		objects = new LinkedList<AbstractGeometricObject>();
 		lights = new LinkedList<Light>();
-		build(rt);
+		build();
 	}
 	
 	/**

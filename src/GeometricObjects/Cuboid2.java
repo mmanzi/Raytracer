@@ -1,10 +1,8 @@
 package GeometricObjects;
 
-import javax.vecmath.Matrix3f;
 import javax.vecmath.Point3f;
 import javax.vecmath.Vector3f;
 
-import utils.VectorUtils;
 import Material.Material;
 import Utility.HitRecord;
 import Utility.Ray;
