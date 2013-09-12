@@ -18,6 +18,8 @@ public abstract class Camera {
 
 	public abstract RGBColor[][] renderScene(RGBColor[][] img, Tracer rt);
 
+	public abstract RGBColor renderPixel(int x, int y, Tracer rt);
+
 	Point3f position;
 	Point3f lookAt;
 	Vector3f up;
@@ -26,7 +28,8 @@ public abstract class Camera {
 	Vector3f uVector, vVector, wVector;
 	Matrix4f transformationMatrix;
 
-	public Camera(Point3f position, Point3f lookAt, Vector3f up, int horizontalResolution, int verticalResolution) {
+	public Camera(Point3f position, Point3f lookAt, Vector3f up,
+			int horizontalResolution, int verticalResolution) {
 		this.position = position;
 		this.lookAt = lookAt;
 		this.up = up;

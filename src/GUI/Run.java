@@ -1,7 +1,8 @@
 package GUI;
 
-import Utility.*;
-import World.*;
+import Utility.RGBColor;
+import World.PresentationScene1;
+import World.World;
 
 public class Run {
 
@@ -10,10 +11,10 @@ public class Run {
 	 */
 
 	public static void main(String[] args) {
-		
-		//World myWorld = new TestScene();
-		World myWorld = new Scene3();
-		
+
+		// World myWorld = new TestScene();
+		World myWorld = new PresentationScene1();
+
 		RGBColor[][] rendered_image = myWorld.render_scene();
 		new GUI(rendered_image);
 	}

@@ -11,22 +11,22 @@ import Utility.Ray;
 /**
  *  A trivial unicolor material
  */
-public  class RefractingPhongMaterial extends Material{
+public  class RefractingToonMaterial extends Material{
 
 	RGBColor diffusecolor,ambientcolor,specularcolor;
 	float shininess;
 	Tracer trace;
 	
-	public RefractingPhongMaterial(RGBColor dcolor,RGBColor acolor,RGBColor scolor,float s,float r,Tracer t,float ref){
+	public RefractingToonMaterial(RGBColor dcolor,RGBColor acolor,RGBColor scolor,float s,float r,Tracer t,float ref){
 		super();
 		this.diffusecolor = dcolor;
 		this.ambientcolor = acolor;
 		this.specularcolor = scolor;
 		this.shininess = s;
-		this.reflectivity=0.3f;//Todo
+		this.reflectivity=0.0f;//Todo
 		this.trace=t;
 		this.refractionindex=1;//todo
-		this.refractivity=0.6f;//todo
+		this.refractivity=0.0f;//todo
 	}
 	
 	/**
@@ -36,15 +36,10 @@ public  class RefractingPhongMaterial extends Material{
 	public RGBColor shade(HitRecord hit, Light l) {
 		RGBColor erg=new RGBColor(0,0,0);
 		
+		
 		RGBColor lc = new RGBColor(l.getColor());
 		RGBColor diffusec = new RGBColor(diffusecolor);
-		Vector3f n = new Vector3f(hit.getNormal());
-		Vector3f theta = new Vector3f(l.getIncomingRay(hit.getHitPos()));
-		theta.negate();
-		diffusec.mult(l.getAttenuation(theta.length()));
-		theta.normalize();
-		diffusec.mult(lc);
-		diffusec.mult(Math.max(n.dot(theta),0));
+		diffusec.mult(-hit.getNormal().dot(hit.getRay().direction));
 		erg.add(diffusec);
 		
 		RGBColor specularc = new RGBColor(specularcolor);
@@ -57,7 +52,7 @@ public  class RefractingPhongMaterial extends Material{
 		h.add(Lightdir);	
 		h.normalize();
 		
-		specularc.mult((float)Math.pow(h.dot(n),shininess));
+		specularc.mult((float)Math.pow(h.dot(hit.getNormal()),shininess));
 		specularc.mult(lc);
 		erg.add(specularc);
 		erg.add(ambientcolor);

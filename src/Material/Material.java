@@ -12,7 +12,7 @@ import Utility.RGBColor;
 
 public abstract class Material {
 	
-	public float reflectivity=0.0f,refractionindex=1.0f,refractivity=0.0f;
+	public float reflectivity=0.0f,refractionindex=0.0f,refractivity=0.0f;
 	
 	public RGBColor shade(HitRecord hit, Light l)
 	{
