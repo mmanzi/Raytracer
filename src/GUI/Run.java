@@ -1,6 +1,5 @@
 package GUI;
 
-import utils.VectorUtils;
 import Utility.*;
 import World.*;
 
