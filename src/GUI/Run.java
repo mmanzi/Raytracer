@@ -2,6 +2,7 @@ package GUI;
 
 import Utility.RGBColor;
 import World.PresentationScene1;
+import World.Scene2;
 import World.World;
 
 public class Run {
@@ -13,7 +14,7 @@ public class Run {
 	public static void main(String[] args) {
 
 		// World myWorld = new TestScene();
-		World myWorld = new PresentationScene1();
+		World myWorld = new Scene2();
 
 		RGBColor[][] rendered_image = myWorld.render_scene();
 		new GUI(rendered_image);

@@ -15,7 +15,9 @@ import Material.DiffuseMaterial;
 import Material.Material;
 import Material.MirrorPhongMaterial;
 import Material.PhongMaterial;
+import Material.ProceduralRefractingPhongMaterial;
 import Material.RefractingPhongMaterial;
+import ProceduralTexture.ProceduralTexture;
 import Tracers.Tracer;
 import Utility.RGBColor;
 /**
@@ -41,7 +43,7 @@ public class Scene2 extends World {
 //										Math.PI / 4, 
 //										0.3f,						// lens radius
 //										20f, 						// focal length
-//										1000); 						// rays per pixel
+//										100); 						// rays per pixel
 		
 		camera = new PinholeCamera(new Point3f(0.f, 0.f, 14.f), 		// eye
 				new Point3f(0f, 0f, 0.f),  // look-at
@@ -51,19 +53,20 @@ public class Scene2 extends World {
 				Math.PI / 4); 						// rays per pixel
 		
 		//define background color
-		background_color = new RGBColor(.8f,.8f,.8f);
-		
-		//define background color
-		background_color = new RGBColor(0.f,1f,0.f);
-		
-		//define used ray tracer
-		
-		//Add objects
+		background_color = new RGBColor(0.3f,0.3f,0.3f);
 
 
 //		Material redMat = new PhongMaterial(new RGBColor(0.5f, 0.5f, 1f), new RGBColor(0.0f, 0.01f, 0.0f), new RGBColor(0f, 1f, 0.5f), 300.f);
 		Material redMat = new DiffuseMaterial(new RGBColor(1f, 1.f, 1f));
 		Material red2Mat = new RefractingPhongMaterial(new RGBColor(0.f, 0.f, 0.f), new RGBColor(0.0f, 0.0f, 0.0f), new RGBColor(0f, 0.f, 0.f), 300.f,0.0f,t,1f,0.0f);
+		Material redparamMat = new ProceduralRefractingPhongMaterial(new RGBColor(0.f, 0.f, 0.f), new RGBColor(0.0f, 0.0f, 0.0f), new RGBColor(0f, 0.f, 0.f), 300.f,0.0f,t,1f,0.0f,new ProceduralTexture(){
+			public RGBColor getColor(RGBColor g, Vector3f v){
+				RGBColor w=new RGBColor(0.5f,.5f,.5f);
+				//w.mult(1-(v.length()/50));
+				w.sanatize();
+				return (Math.floor(v.x*3.5)%2==0)^(Math.floor(v.z*3.5)%2==0)^(Math.floor(v.y*3.5)%2==0)?new RGBColor(0f,0f,0f):w;
+				}
+		});
 		
 		//Rectangle2 tri = new Rectangle2(redMat,new Point3f(0f, -2f, -10f),new Point3f(0f, 2f, -10f),new Point3f(4f, -2f, -10f));
 		Triangle tri = new Triangle(redMat,new Point3f(0f, -2f, -10f),new Point3f(0f, 2f, -10f),new Point3f(4f, -2f, -10f));
@@ -71,19 +74,19 @@ public class Scene2 extends World {
 		//Cuboid thingy = new Cuboid(redMat, new Point3f(-4f, 4f, 0f), new Vector3f(1f, 0f, 0f), 2f, 4f, new Vector3f(0f, 0f, -1f), 6f);
  //		Rectangle thingy = new Rectangle(redMat, new Point3f(-1f, 1f, -5f), new Vector3f(0f, 1f, 0f), new Vector3f(0f, 0f, -1f), 2f, 2f);
 		//objects.add(thingy);
-		objects.add(tri);
-		objects.add(tri2);
-		Sphere sphere = new Sphere(redMat, new Point3f(1f, -1f, -7f), 0.5f);
+//		objects.add(tri);
+//		objects.add(tri2);
+		Sphere sphere = new Sphere(redparamMat, new Point3f(1f, 1f, -7f), 2f);
 		objects.add(sphere);
 		
 
 		//Material blueMat = new DiffuseMaterial(new RGBColor(0.0f, 0.0f, 1.f));
-		Material blueMat = new DiffuseMaterial(new RGBColor(0.3f, 0.3f, 0.3f));
+		Material blueMat = new RefractingPhongMaterial(new RGBColor(0.f, 0.f, 1f), new RGBColor(0.0f, 0.0f, 0.0f), new RGBColor(0f, 0.f, 0.f), 300.f,0.8f,t,1f,0.0f);
 		Plane blue2Plane = new Plane(blueMat, new Point3f(0.f,-2f,0.f), new Vector3f(0.f, 1.f, 0.f));
 		objects.add(blue2Plane);
 
 
-		Plane bluePlane = new Plane(blueMat, new Point3f(0.f,2.f,0.f), new Vector3f(0.f, -1.f, 0.f));
+		Plane bluePlane = new Plane(blueMat, new Point3f(0.f,2.f,0.f), new Vector3f(0.f, -1.f, 1f));
 		//objects.add(bluePlane);
 		
 		//Add light sources
