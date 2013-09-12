@@ -6,14 +6,10 @@ import javax.vecmath.Vector3f;
 import Camera.PinholeCamera;
 import GeometricObjects.Cuboid2;
 import GeometricObjects.Plane;
-import GeometricObjects.Rectangle2;
-import GeometricObjects.Triangle;
 import Light.Light;
 import Light.MovableLight;
-import Material.DiffuseMaterial;
 import Material.Material;
-import Material.PhongMaterial;
-import Tracers.Tracer;
+import Material.RefractingPhongMaterial;
 import Utility.RGBColor;
 /**
  * A simple test scene
@@ -23,7 +19,7 @@ import Utility.RGBColor;
 public class Scene3 extends World {
 
 	
-	protected void build(Tracer t) {
+	protected void build() {
 		
 		//define image resolution
 		hres = 500;
@@ -46,7 +42,7 @@ public class Scene3 extends World {
 
 
 //		Material redMat = new PhongMaterial(new RGBColor(0.5f, 0.5f, 1f), new RGBColor(0.0f, 0.01f, 0.0f), new RGBColor(0f, 1f, 0.5f), 300.f);
-		Material redMat = new DiffuseMaterial(new RGBColor(1f, 1.f, 1f));
+		Material redMat = new RefractingPhongMaterial(new RGBColor(1f, 1.f, 1f));
 			
 
 	//	Material redMat = new DiffuseMaterial(new RGBColor(1.f, 0.5f, 0f));
@@ -90,12 +86,12 @@ public class Scene3 extends World {
 		
 
 		//Material blueMat = new DiffuseMaterial(new RGBColor(0.0f, 0.0f, 1.f));
-		Material blueMat = new DiffuseMaterial(new RGBColor(1f, 1f, 1f));
+		Material blueMat = new RefractingPhongMaterial(new RGBColor(1f, 1f, 1f));
 		Plane blue2Plane = new Plane(blueMat, new Point3f(0.f,-2f,0.f), new Vector3f(0.f, 1.f, 0.f));
 		objects.add(blue2Plane);
 
 
-		Plane bluePlane = new Plane(blueMat, new Point3f(0.f,2.f,0.f), new Vector3f(0.f, -1.f, 0.f));
+//		Plane bluePlane = new Plane(blueMat, new Point3f(0.f,2.f,0.f), new Vector3f(0.f, -1.f, 0.f));
 		//objects.add(bluePlane);
 		
 		//Add light sources

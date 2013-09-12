@@ -1,10 +1,6 @@
 package ProceduralTexture;
 
 
-import javax.vecmath.Vector3f;
-
-import Utility.RGBColor;
-
 /*Farbverlauf
  * public RGBColor getColor(RGBColor g, Vector3f v){
  *				Vector3f w = new Vector3f(v);

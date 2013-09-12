@@ -9,16 +9,14 @@ import GeometricObjects.Rectangle2;
 import GeometricObjects.Sphere;
 import Light.Light;
 import Light.MovableLight;
-import Material.DiffuseMaterial;
 import Material.Material;
-import Material.PhongMaterial;
-import Tracers.Tracer;
+import Material.RefractingPhongMaterial;
 import Utility.RGBColor;
 
 public class PresentationScene1 extends World {
 
 	@Override
-	protected void build(Tracer t) {
+	protected void build() {
 		// define image resolution
 		hres = 300;
 		vres = 300;
@@ -36,20 +34,20 @@ public class PresentationScene1 extends World {
 		// define background color
 		background_color = new RGBColor(.2f, .8f, 1f);
 
-		Material planeMaterial = new PhongMaterial(
+		Material planeMaterial = new RefractingPhongMaterial(
 				new RGBColor(.8f, .8f, .8f), new RGBColor(0.2f,0.2f,0.2f),new RGBColor(0f,0f,0f), hres);
 		Plane bottomPlane = new Plane(planeMaterial, new Point3f(0f, 0f, 0f),
 				new Vector3f(0f, 1f, 0f));
 		objects.add(bottomPlane);
 
-		Material sphereMaterial = new DiffuseMaterial(new RGBColor(.122f, .341f,
+		Material sphereMaterial = new RefractingPhongMaterial(new RGBColor(.122f, .341f,
 				1f));
 		Sphere sphere = new Sphere(sphereMaterial, new Point3f(0f, 3f, 1f), 0.54f);
 		objects.add(sphere);
 
-		Material leftRectangleMaterial = new PhongMaterial(new RGBColor(.722f, .18f, .0f), new RGBColor(.722f/3, .18f/3, .0f/3),new RGBColor(0f,0f,0f), 1);
-		Material rightRectangleMaterial = new PhongMaterial(new RGBColor(.0f,.722f, .18f), new RGBColor(.0f/3,.722f/3, .18f/3),new RGBColor(0f,0f,0f), 1);
-		Material rectangleMaterial = new PhongMaterial(new RGBColor(1f, 0.902f, .6f), new RGBColor(1f/3, 0.902f/3, .6f/3),new RGBColor(0f,0f,0f), 1);
+		Material leftRectangleMaterial = new RefractingPhongMaterial(new RGBColor(.722f, .18f, .0f), new RGBColor(.722f/3, .18f/3, .0f/3),new RGBColor(0f,0f,0f), 1);
+		Material rightRectangleMaterial = new RefractingPhongMaterial(new RGBColor(.0f,.722f, .18f), new RGBColor(.0f/3,.722f/3, .18f/3),new RGBColor(0f,0f,0f), 1);
+		Material rectangleMaterial = new RefractingPhongMaterial(new RGBColor(1f, 0.902f, .6f), new RGBColor(1f/3, 0.902f/3, .6f/3),new RGBColor(0f,0f,0f), 1);
 
 		Rectangle2 topRectangle = new Rectangle2(rectangleMaterial,
 				new Point3f(-2.5f, 5f, -2.5f), new Point3f(2.5f, 5f, -2.5f),

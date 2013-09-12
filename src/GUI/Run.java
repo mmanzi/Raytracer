@@ -1,7 +1,6 @@
 package GUI;
 
 import Utility.RGBColor;
-import World.PresentationScene1;
 import World.Scene2;
 import World.World;
 
