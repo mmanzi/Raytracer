@@ -5,6 +5,7 @@ import javax.vecmath.Vector3f;
 
 import Camera.PinholeCamera;
 import GeometricObjects.Plane;
+import GeometricObjects.Rectangle2;
 import GeometricObjects.Sphere;
 import GeometricObjects.Triangle;
 import Light.Light;
@@ -49,9 +50,9 @@ public class Scene2 extends World {
 
 //		Material redMat = new PhongMaterial(new RGBColor(0.5f, 0.5f, 1f), new RGBColor(0.0f, 0.01f, 0.0f), new RGBColor(0f, 1f, 0.5f), 300.f);
 		Material redMat = new DiffuseMaterial(new RGBColor(1f, 1.f, 1f));
-		Material red2Mat = new RefractingToonMaterial(new RGBColor(0.5f, 0.5f, 1f), new RGBColor(0.0f, 0.01f, 0.0f), new RGBColor(0f, 1f, 0.5f), 300.f,0.5f,t,1.5f);
+		Material red2Mat = new RefractingPhongMaterial(new RGBColor(0.5f, 0.5f, 1f), new RGBColor(0.0f, 0.01f, 0.0f), new RGBColor(0f, 1f, 0.5f), 300.f,0.0f,t,1.5f);
 		
-	//	Material redMat = new DiffuseMaterial(new RGBColor(1.f, 0.5f, 0f));
+		//Rectangle2 tri = new Rectangle2(redMat,new Point3f(0f, -2f, -10f),new Point3f(0f, 2f, -10f),new Point3f(4f, -2f, -10f));
 		Triangle tri = new Triangle(redMat,new Point3f(0f, -2f, -10f),new Point3f(0f, 2f, -10f),new Point3f(4f, -2f, -10f));
 		Triangle tri2 = new Triangle(red2Mat,new Point3f(-1f, -1f, -6f),new Point3f(-1f, 1f, -7f),new Point3f(1f, -1f, -8f));
 		//Cuboid thingy = new Cuboid(redMat, new Point3f(-4f, 4f, 0f), new Vector3f(1f, 0f, 0f), 2f, 4f, new Vector3f(0f, 0f, -1f), 6f);

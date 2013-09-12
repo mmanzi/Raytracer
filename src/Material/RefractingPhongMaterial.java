@@ -23,10 +23,10 @@ public  class RefractingPhongMaterial extends Material{
 		this.ambientcolor = acolor;
 		this.specularcolor = scolor;
 		this.shininess = s;
-		this.reflectivity=0.5f;//Todo
+		this.reflectivity=0.3f;//Todo
 		this.trace=t;
 		this.refractionindex=1;//todo
-		this.refractivity=0.4f;//todo
+		this.refractivity=0.6f;//todo
 	}
 	
 	/**
