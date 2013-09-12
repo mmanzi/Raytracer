@@ -68,7 +68,7 @@ public  class MirrorPhongMaterial extends Material{
 		Vector3f v=new Vector3f(hit.getNormal());
 		v.scale((-2*(hit.getRay().direction).dot(hit.getNormal())));
 		v.add(hit.getRay().direction);
-		Ray ray=new Ray(hit.getHitPos(),v);
+		Ray ray=new Ray(hit.getHitPos(),v, hit.getRay().dept+1);
 		RGBColor q = new RGBColor(t.trace(ray));
 		q.mult(reflectivity);
 		return q;

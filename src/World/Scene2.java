@@ -15,7 +15,6 @@ import Material.Material;
 import Material.MirrorPhongMaterial;
 import Material.PhongMaterial;
 import Material.RefractingPhongMaterial;
-import Material.RefractingToonMaterial;
 import Tracers.Tracer;
 import Utility.RGBColor;
 /**
@@ -50,17 +49,17 @@ public class Scene2 extends World {
 
 //		Material redMat = new PhongMaterial(new RGBColor(0.5f, 0.5f, 1f), new RGBColor(0.0f, 0.01f, 0.0f), new RGBColor(0f, 1f, 0.5f), 300.f);
 		Material redMat = new DiffuseMaterial(new RGBColor(1f, 1.f, 1f));
-		Material red2Mat = new RefractingPhongMaterial(new RGBColor(0.5f, 0.5f, 1f), new RGBColor(0.0f, 0.01f, 0.0f), new RGBColor(0f, 1f, 0.5f), 300.f,0.0f,t,1.5f);
+		Material red2Mat = new RefractingPhongMaterial(new RGBColor(0.f, 0.f, 0.f), new RGBColor(0.0f, 0.0f, 0.0f), new RGBColor(0f, 0.f, 0.f), 300.f,0.0f,t,1f,0.0f);
 		
 		//Rectangle2 tri = new Rectangle2(redMat,new Point3f(0f, -2f, -10f),new Point3f(0f, 2f, -10f),new Point3f(4f, -2f, -10f));
 		Triangle tri = new Triangle(redMat,new Point3f(0f, -2f, -10f),new Point3f(0f, 2f, -10f),new Point3f(4f, -2f, -10f));
-		Triangle tri2 = new Triangle(red2Mat,new Point3f(-1f, -1f, -6f),new Point3f(-1f, 1f, -7f),new Point3f(1f, -1f, -8f));
+		Triangle tri2 = new Triangle(red2Mat,new Point3f(-1f, -1f, -4f),new Point3f(-1f, 1f, -4.1f),new Point3f(1f, -1f, -4f));
 		//Cuboid thingy = new Cuboid(redMat, new Point3f(-4f, 4f, 0f), new Vector3f(1f, 0f, 0f), 2f, 4f, new Vector3f(0f, 0f, -1f), 6f);
  //		Rectangle thingy = new Rectangle(redMat, new Point3f(-1f, 1f, -5f), new Vector3f(0f, 1f, 0f), new Vector3f(0f, 0f, -1f), 2f, 2f);
 		//objects.add(thingy);
 		objects.add(tri);
 		objects.add(tri2);
-		Sphere sphere = new Sphere(redMat, new Point3f(1f, 1f, -7f), 0.5f);
+		Sphere sphere = new Sphere(redMat, new Point3f(1f, -1f, -7f), 0.5f);
 		objects.add(sphere);
 		
 

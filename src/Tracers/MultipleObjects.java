@@ -14,7 +14,6 @@ public class MultipleObjects extends Tracer {
 	public MultipleObjects(World w) {
 		super(w);
 	}
-	static int dept=0;
 	/**
 	 * This simple tracer iterates over all objects and light sources
 	 * 
@@ -53,13 +52,10 @@ public class MultipleObjects extends Tracer {
 					color.add(hit.shade(lightsource));
 				}
 			}
-			
-			++dept;
-			if(dept<=3)
+			if(ray.dept<=3)
 				color.add(new RGBColor(hit.mirrorshade(this)));
-			if(dept<=3)
+			if(ray.dept<=3)
 				color.add(new RGBColor(hit.refrectionshade(this)));
-			--dept;
 			return color;
 		} else {
 			return world_ptr.getBackgroundColor();
