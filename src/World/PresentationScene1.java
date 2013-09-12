@@ -20,18 +20,18 @@ public class PresentationScene1 extends World {
 	@Override
 	protected void build(Tracer t) {
 		// define image resolution
-		hres = 4000;
-		vres = 4000;
+		hres = 300;
+		vres = 300;
 
 		// define camera
-		camera = new LensCamera(new Point3f(0.f, 2.5f, 12.f), // eye
+		camera = new LensCamera(new Point3f(-3.f, 2.5f, 12.f), // eye
 				new Point3f(0f, 2f, 0f), // look-at
 				new Vector3f(0.f, 1.f, 0.f), // up
 				hres, // horizontal resolution
 				vres, // vertical resolution
-				Math.PI / 4, 0f, // lens radius
-				14f, // focal length
-				1); // rays per pixel
+				Math.PI / 4, 0.5f, // lens radius
+				13f, // focal length
+				500); // rays per pixel
 
 		// define background color
 		background_color = new RGBColor(.2f, .8f, 1f);
