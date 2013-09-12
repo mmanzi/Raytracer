@@ -10,7 +10,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import Tracers.Tracer;
 import Utility.RGBColor;
 import World.PresentationScene1;
 import World.World;
