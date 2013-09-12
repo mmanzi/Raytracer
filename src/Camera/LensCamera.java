@@ -1,7 +1,5 @@
 package Camera;
 
-import java.util.Random;
-
 import javax.vecmath.Point3f;
 import javax.vecmath.Vector3f;
 
@@ -37,21 +35,27 @@ public class LensCamera extends Camera {
 
 	@Override
 	public RGBColor[][] renderScene(RGBColor[][] img, Tracer rt) {
-		Ray ray = new Ray();
 		for (int x = 0; x < horizontalResolution; x++) {
 			for (int y = 0; y < verticalResolution; y++) {
-				img[x][y] = new RGBColor();
-				Point3f focalPoint = generateFocalPoint(x, y);
 				System.out.println("X: " + x + " Y: " + y);
-				for (int i = 0; i < raysPerPixel; i++) {
-					ray = generateRay(x, y, focalPoint);
-					RGBColor color = rt.trace(ray);
-					img[x][y].add(color);
-				}
-				img[x][y].div(raysPerPixel);
+				img[x][y] = renderPixel(x, y, rt);
 			}
 		}
 		return img;
+	}
+
+	@Override
+	public RGBColor renderPixel(int x, int y, Tracer rt) {
+		Ray ray;
+		RGBColor rgbColor = new RGBColor();
+		Point3f focalPoint = generateFocalPoint(x, y);
+		for (int i = 0; i < raysPerPixel; i++) {
+			ray = generateRay(x, y, focalPoint);
+			RGBColor color = rt.trace(ray);
+			rgbColor.add(color);
+		}
+		rgbColor.div(raysPerPixel);
+		return rgbColor;
 	}
 
 	private Ray generateRay(int x, int y, Point3f p) {
@@ -75,19 +79,19 @@ public class LensCamera extends Camera {
 				-verticalDistanceToCenter, -1);
 
 		transformationMatrix.transform(p);
-		
+
 		Vector3f direction = VectorUtils.createVectorAB(position, p);
 		direction.normalize();
 
 		float angleRad = direction.angle(viewingDirection);
 		float t = (float) (focalLength / Math.cos(angleRad));
-		//float t = focalLength;
+		// float t = focalLength;
 
 		Point3f onFocalPlane = new Point3f(position);
 		onFocalPlane.add(VectorUtils.scaleVector(direction, t));
 
-	//	transformationMatrix.transform(onFocalPlane);
-		
+		// transformationMatrix.transform(onFocalPlane);
+
 		return onFocalPlane;
 	}
 
@@ -95,11 +99,11 @@ public class LensCamera extends Camera {
 		Point3f randomPoint = new Point3f(position);
 
 		float randomScale = randFloat((-1) * lensRadius, lensRadius);
-		Vector3f direction = new Vector3f(up);		
-		if(Math.random() < 0.5f) {
+		Vector3f direction = new Vector3f(up);
+		if (Math.random() < 0.5f) {
 			direction.cross(direction, viewingDirection);
 		}
-		
+
 		randomPoint.add(VectorUtils.scaleVector(direction, randomScale));
 
 		return randomPoint;

@@ -26,13 +26,17 @@ public class PinholeCamera extends Camera {
 
 	@Override
 	public RGBColor[][] renderScene(RGBColor[][] img, Tracer rt) {
-		Ray ray = new Ray();
 		for (int x = 0; x < horizontalResolution; x++)
 			for (int y = 0; y < verticalResolution; y++) {
-				ray = generateRay(x, y);
-				img[x][y] = rt.trace(ray);
+				img[x][y] = renderPixel(x, y, rt);
 			}
 		return img;
+	}
+	
+	@Override
+	public RGBColor renderPixel(int x, int y, Tracer rt) {
+		Ray ray = generateRay(x, y);
+		return rt.trace(ray);
 	}
 
 	private Ray generateRay(int x, int y) {
