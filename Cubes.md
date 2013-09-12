@@ -1,3 +1,4 @@
+/*
      g+--------+f
      /|       /|
     / |      / |
@@ -9,3 +10,4 @@
   d+--------+b
 Point description
 Cuboid2(redMat,a,c,b,d);
+*/
