@@ -13,7 +13,7 @@ import Utility.Ray;
 public abstract class AbstractGeometricObject {
 
 	Material mat;
-	final protected float tmin = 0.0001f;
+	final protected float tmin = 0.5f;
 	
 	public AbstractGeometricObject(Material mat){
 		this.mat = mat;

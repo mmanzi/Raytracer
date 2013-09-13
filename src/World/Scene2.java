@@ -3,7 +3,7 @@ package World;
 import javax.vecmath.Point3f;
 import javax.vecmath.Vector3f;
 
-import Camera.PinholeCamera;
+import Camera.LensCamera;
 import GeometricObjects.Plane;
 import GeometricObjects.Sphere;
 import Light.Light;
@@ -28,23 +28,23 @@ public class Scene2 extends World {
 		vres = 1000;
 		
 		//define camera
-//		camera = new LensCamera(new Point3f(0.f, 0.f, 14.f), 		// eye
-//										new Point3f(0f, 0f, 0.f),  // look-at
-//										new Vector3f(0.f, 1.f,0.f),	//up
-//										hres,						//horizontal resolution
-//										vres,						//vertical resolution
-//										Math.PI / 4, 
-//										0.3f,						// lens radius
-//										20f, 						// focal length
-//										100); 						// rays per pixel
+		camera = new LensCamera(new Point3f(0.f, 0.f, 14.f), 		// eye
+										new Point3f(1f, 1f, -7.f),  // look-at
+										new Vector3f(0.f, 1.f,0.f),	//up
+										hres,						//horizontal resolution
+										vres,						//vertical resolution
+										Math.PI / 4, 
+										0.3f,						// lens radius
+										20.2f, 						// focal length
+										100); 						// rays per pixel
 		
-		camera = new PinholeCamera(new Point3f(0.f, 0.f, 14.f), 		// eye
-				new Point3f(0f, 0f, 0.f),  // look-at
-				new Vector3f(0.f, 1.f,0.f),	//up
-				hres,						//horizontal resolution
-				vres,						//vertical resolution
-				Math.PI / 4); 						// rays per pixel
-		
+//		camera = new PinholeCamera(new Point3f(0.f, 0.f, 14.f), 		// eye
+//				new Point3f(0f, 0f, 0.f),  // look-at
+//				new Vector3f(0.f, 1.f,0.f),	//up
+//				hres,						//horizontal resolution
+//				vres,						//vertical resolution
+//				Math.PI / 4); 						// rays per pixel
+//		
 		//define background color
 		background_color = new RGBColor(0.3f,0.3f,0.3f);
 
@@ -53,12 +53,9 @@ public class Scene2 extends World {
 //		Material redMat = new RefractingPhongMaterial(new RGBColor(1f, 1.f, 1f));
 //		Material red2Mat = new RefractingPhongMaterial(new RGBColor(0.f, 0.f, 0.f), new RGBColor(0.0f, 0.0f, 0.0f), new RGBColor(0f, 0.f, 0.f), 300.f,0.0f,1f,0.0f);
 		Material redparamMat = new ProceduralRefractingPhongMaterial(new RGBColor(0.f, 0.f, 0.f), new RGBColor(0.0f, 0.0f, 0.0f), new RGBColor(0f, 0.f, 0.f), 300.f,0.0f,1f,0.0f,new ProceduralTexture(){
-			public RGBColor getColor(RGBColor g, Vector3f v){
-				RGBColor w=new RGBColor(0.5f,.5f,.5f);
-				//w.mult(1-(v.length()/50));
-				w.sanatize();
-				return (Math.floor(v.x*3.5)%2==0)^(Math.floor(v.z*3.5)%2==0)^(Math.floor(v.y*3.5)%2==0)?new RGBColor(0f,0f,0f):w;
-				}
+			  public RGBColor getColor(RGBColor g, Vector3f v){
+				 				return Math.floor(v.x*4)%2==0?new RGBColor(0f,0f,0f):new RGBColor(0.5f,.5f,.5f);
+				 				}
 		});
 		
 		//Rectangle2 tri = new Rectangle2(redMat,new Point3f(0f, -2f, -10f),new Point3f(0f, 2f, -10f),new Point3f(4f, -2f, -10f));

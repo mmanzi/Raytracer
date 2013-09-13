@@ -1,5 +1,11 @@
 package GUI;
 
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -8,24 +14,20 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 import Utility.RGBColor;
-import World.PresentationScene1;
+import World.Scene2;
 import World.World;
 
 public class MultithreadingGui extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	public void run() {
-		World myWorld = new PresentationScene1();
+		World myWorld = new Scene2();
 
 		RGBColor[][] img = new RGBColor[myWorld.getHres()][myWorld.getVres()];
-
-		int w = img.length;
-		int h = img[1].length;
+		int w = myWorld.getVres();
+		int h = myWorld.getHres();
 
 		// setup frame
 		setTitle("Raytracer");
@@ -35,18 +37,13 @@ public class MultithreadingGui extends JFrame {
 		this.setVisible(true);
 
 		int processorCount = Runtime.getRuntime().availableProcessors();
-		int pixelsPerProcessor = img.length / processorCount;
-		int rest = img.length % processorCount;
+		System.out.print(Runtime.getRuntime().availableProcessors());
+		int colsPerProcessor = w / processorCount;
+		int rest = w % processorCount;
 
 		List<Thread> workers = new LinkedList<Thread>();
-		int min = 0, max = 0;
-		for (int i = 1; i <= processorCount; i++) {
-			min += max;
-			max += pixelsPerProcessor;
-			if (i == processorCount) {
-				max += rest;
-			}
-			Runnable runnable = new RenderRunnable(myWorld, img, min, max);
+		for (int i = 0; i < w; i+=colsPerProcessor) {
+			Runnable runnable = new RenderRunnable(myWorld, img, i, i+colsPerProcessor+rest==w?i+colsPerProcessor+rest:i+colsPerProcessor);
 			Thread worker = new Thread(runnable);
 			worker.setName(String.valueOf(i));
 			worker.start();
@@ -55,10 +52,13 @@ public class MultithreadingGui extends JFrame {
 
 		int running = 0;
 		BufferedImage bufferedImg;
-		do {
+		do
+		{
 			running = 0;
-			for (Thread thread : workers) {
-				if (thread.isAlive()) {
+			for (Thread thread : workers)
+			{
+				if (thread.isAlive())
+				{
 					running++;
 				}
 			}
@@ -69,18 +69,26 @@ public class MultithreadingGui extends JFrame {
 					// conversion from float RGB to int value in range [0,255]
 					// required. For now clamp vlaues that are too high!
 					if (img[i][j] != null) {
-						Color pix_color = new Color((int) (255 * Math.min(1,
-								img[i][j].r)), (int) (255 * Math.min(1,
-								img[i][j].g)), (int) (255 * Math.min(1,
-								img[i][j].b)));
+						Color pix_color = new Color(
+											(int) (255 * Math.min(1,img[i][j].r)),
+											(int) (255 * Math.min(1,img[i][j].g)),
+											(int) (255 * Math.min(1,img[i][j].b)));
 						bufferedImg.setRGB(i, j, pix_color.getRGB());
 					}
 				}
 			}
-			// add bufferedImage to JFrame
+
+			 //add bufferedImage to JFrame
+			JPanel panel = new JPanel();
 			ImageIcon ic = new ImageIcon(bufferedImg);
-			JLabel jp = new JLabel(ic);
-			add(jp);
+			super.setIconImage(bufferedImg);
+			
+			JLabel label = new JLabel();
+			label.setIcon(ic);
+		    panel.add(label);
+		    super.getContentPane().add(panel);
+		    super.pack();
+			
 		} while (running > 0);
 
 		String type = "png";
@@ -92,6 +100,7 @@ public class MultithreadingGui extends JFrame {
 		}
 	}
 
+	
 	public class RenderRunnable implements Runnable {
 		public final World world;
 		public final RGBColor[][] img;
@@ -107,8 +116,8 @@ public class MultithreadingGui extends JFrame {
 		@Override
 		public void run() {
 			for (int x = min; x < max; x++) {
-				for (int y = 0; y < img[0].length; y++) {
-					System.out.println("X: " + x + " Y: " + y);
+				for (int y = 0; y < world.getHres(); y++) {
+					//System.out.println("X: " + x + " Y: " + y);
 					img[x][y] = world.renderPixel(x, y);
 				}
 			}

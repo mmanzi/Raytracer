@@ -18,8 +18,8 @@ public class PresentationScene1 extends World {
 	@Override
 	protected void build() {
 		// define image resolution
-		hres = 2000;
-		vres = 2000;
+		hres = 1000;
+		vres = 1000;
 
 		// define camera
 //		camera = new LensCamera(new Point3f(0f, 2.5f, 12.f), // eye
